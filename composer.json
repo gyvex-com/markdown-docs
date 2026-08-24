@@ -1,0 +1,50 @@
+{
+    "name": "gyvex-com/markdown-docs",
+    "description": "Render a configurable folder of markdown files as a browsable /docs site in Laravel, with nested path routing and an auto-generated sidebar.",
+    "type": "library",
+    "keywords": ["laravel", "markdown", "docs", "commonmark"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Gyvex Com"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "illuminate/contracts": "^11|^12|^13",
+        "illuminate/support": "^11|^12|^13",
+        "illuminate/routing": "^11|^12|^13",
+        "league/commonmark": "^2",
+        "symfony/finder": "^6|^7",
+        "symfony/yaml": "^6|^7"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^9|^10|^11",
+        "phpunit/phpunit": "^10|^11"
+    },
+    "autoload": {
+        "psr-4": {
+            "GyvexCom\\MarkdownDocs\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "GyvexCom\\MarkdownDocs\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "GyvexCom\\MarkdownDocs\\MarkdownDocsServiceProvider"
+            ],
+            "aliases": {
+                "MarkdownDocs": "GyvexCom\\MarkdownDocs\\MarkdownDocs"
+            }
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
