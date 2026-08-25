@@ -26,6 +26,29 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Branding
+    |--------------------------------------------------------------------------
+    |
+    | Controls the brand shown in the sidebar header and the mobile topbar.
+    |
+    |  - `logo`   A path or URL to a logo image. It can be an absolute URL, a
+    |             path relative to the docs root (served by the package's logo
+    |             route), or an absolute web path starting with `/`. When set,
+    |             it takes precedence over `text`.
+    |  - `text`   The brand text shown when no `logo` is configured. When null,
+    |             the capitalized route prefix is used as a fallback.
+    |
+    | Both values can also be set per docs folder via the `logo` and `text`
+    | keys in the `.docs.yaml` config file, which take precedence over these.
+    |
+    */
+    'branding' => [
+        'logo' => null,
+        'text' => null,
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Middleware
     |--------------------------------------------------------------------------
     |

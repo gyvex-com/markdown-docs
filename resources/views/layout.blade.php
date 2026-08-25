@@ -25,7 +25,11 @@
             --md-bg: #0f1117;
             --md-sidebar-bg: #14171f;
         }
-        html.md-dark .md-content code { color: #c7d2fe; }
+        html.md-dark .md-content code {
+            color: #e2e8f0;
+            background: #1f2733;
+            border: 1px solid #2a3340;
+        }
         html.md-dark .md-content pre { background: #06080d; }
         html.md-dark .md-menu-toggle,
         html.md-dark .md-sidebar .md-close { color: var(--md-muted); }
@@ -98,6 +102,12 @@
             letter-spacing: -0.01em;
             color: var(--md-brand);
             text-decoration: none;
+        }
+        .md-topbar .md-brand--logo,
+        .md-sidebar .md-brand--logo {
+            max-height: 28px;
+            width: auto;
+            display: block;
         }
         .md-sidebar .md-close {
             display: none;
@@ -232,7 +242,11 @@
                 <line x1="3" y1="18" x2="21" y2="18"></line>
             </svg>
         </button>
-        <span class="md-brand">{{ ucfirst(config('docs.route_prefix', 'docs')) }}</span>
+        @if (!empty($brandLogo))
+            <img src="{{ $brandLogo }}" alt="{{ $brandText ?? '' }}" class="md-brand md-brand--logo">
+        @else
+            <span class="md-brand">{{ $brandText ?? ucfirst(config('docs.route_prefix', 'docs')) }}</span>
+        @endif
     </header>
 
     <div class="md-layout">

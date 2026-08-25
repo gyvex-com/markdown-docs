@@ -33,6 +33,8 @@ class DocsController
             'activePath' => $activePath,
             'stylesheetUrl' => $stylesheetUrl,
             'darkMode' => (bool) config('docs.dark_mode'),
+            'brandLogo' => DocsConfig::brandingLogoUrl(),
+            'brandText' => DocsConfig::brandingText(),
         ]);
     }
 }
