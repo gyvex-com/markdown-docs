@@ -1,6 +1,7 @@
 <?php
 
 use GyvexCom\MarkdownDocs\Http\Controllers\DocsController;
+use GyvexCom\MarkdownDocs\Http\Controllers\DocsLogoController;
 use GyvexCom\MarkdownDocs\Http\Controllers\DocsStylesheetController;
 use Illuminate\Support\Facades\Route;
 
@@ -11,6 +12,9 @@ if ($prefix !== '') {
         ->group(function () use ($prefix) {
             Route::get($prefix.'/stylesheet', [DocsStylesheetController::class, 'stylesheet'])
                 ->name('markdown-docs.stylesheet');
+
+            Route::get($prefix.'/logo', [DocsLogoController::class, 'logo'])
+                ->name('markdown-docs.logo');
 
             Route::get($prefix.'/{path?}', [DocsController::class, 'show'])
                 ->where('path', '.*')

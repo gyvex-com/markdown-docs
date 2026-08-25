@@ -103,6 +103,12 @@
             color: var(--md-brand);
             text-decoration: none;
         }
+        .md-topbar .md-brand--logo,
+        .md-sidebar .md-brand--logo {
+            max-height: 28px;
+            width: auto;
+            display: block;
+        }
         .md-sidebar .md-close {
             display: none;
             border: none;
@@ -236,7 +242,11 @@
                 <line x1="3" y1="18" x2="21" y2="18"></line>
             </svg>
         </button>
-        <span class="md-brand">{{ ucfirst(config('docs.route_prefix', 'docs')) }}</span>
+        @if (!empty($brandLogo))
+            <img src="{{ $brandLogo }}" alt="{{ $brandText ?? '' }}" class="md-brand md-brand--logo">
+        @else
+            <span class="md-brand">{{ $brandText ?? ucfirst(config('docs.route_prefix', 'docs')) }}</span>
+        @endif
     </header>
 
     <div class="md-layout">

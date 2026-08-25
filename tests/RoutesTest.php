@@ -3,6 +3,7 @@
 namespace GyvexCom\MarkdownDocs\Tests;
 
 use GyvexCom\MarkdownDocs\MarkdownDocsServiceProvider;
+use Illuminate\Support\Facades\Config;
 
 class RoutesTest extends PackageTestCase
 {
@@ -112,5 +113,70 @@ class RoutesTest extends PackageTestCase
         $this->get('/docs')
             ->assertStatus(200)
             ->assertSee('Getting Started');
+    }
+
+    public function test_default_brand_falls_back_to_route_prefix(): void
+    {
+        $this->writeDoc('index.md', "---\ntitle: Home\n---\n# Home");
+
+        $this->get('/docs')
+            ->assertStatus(200)
+            ->assertSee('Docs');
+    }
+
+    public function test_config_text_overrides_default_brand(): void
+    {
+        Config::set('docs.branding.text', 'My Handbook');
+
+        $this->writeDoc('index.md', "---\ntitle: Home\n---\n# Home");
+
+        $this->get('/docs')
+            ->assertStatus(200)
+            ->assertSee('My Handbook')
+            ->assertDontSee('>Docs<');
+    }
+
+    public function test_docs_yaml_text_overrides_config(): void
+    {
+        Config::set('docs.branding.text', 'Config Text');
+
+        $this->writeDoc('index.md', "---\ntitle: Home\n---\n# Home");
+        $this->writeConfig("text: Yaml Text\n");
+
+        $this->get('/docs')
+            ->assertStatus(200)
+            ->assertSee('Yaml Text')
+            ->assertDontSee('Config Text');
+    }
+
+    public function test_config_logo_image_renders_and_is_served(): void
+    {
+        $this->writeDoc('index.md', "---\ntitle: Home\n---\n# Home");
+        $this->writeDoc('assets/logo.svg', '<svg xmlns="http://www.w3.org/2000/svg"></svg>');
+        Config::set('docs.branding.logo', 'assets/logo.svg');
+
+        $this->get('/docs')
+            ->assertStatus(200)
+            ->assertSee('src="'.$this->app['url']->route('markdown-docs.logo').'"', false)
+            ->assertSee('alt="Docs"', false);
+
+        $this->get('/docs/logo')
+            ->assertStatus(200)
+            ->assertHeader('Content-Type', 'image/svg+xml');
+    }
+
+    public function test_logo_route_404_when_unconfigured(): void
+    {
+        $this->writeDoc('index.md', "---\ntitle: Home\n---\n# Home");
+
+        $this->get('/docs/logo')->assertStatus(404);
+    }
+
+    public function test_logo_traversal_blocked(): void
+    {
+        $this->writeDoc('index.md', "---\ntitle: Home\n---\n# Home");
+        Config::set('docs.branding.logo', '../secret.png');
+
+        $this->get('/docs/logo')->assertStatus(404);
     }
 }

@@ -86,6 +86,17 @@ return [
     // URL prefix under which docs are served. Empty string disables routing.
     'route_prefix' => 'docs',
 
+    // Branding shown in the sidebar and mobile topbar.
+    'branding' => [
+        // Logo image (path or URL). Relative paths are served from the docs
+        // root via the package's logo route. Takes precedence over `text`.
+        'logo' => null,
+
+        // Brand text used when no logo is set. Null falls back to the
+        // capitalized route prefix. Can also be set per folder via `.docs.yaml`.
+        'text' => null,
+    ],
+
     // Middleware applied to the docs routes.
     'middleware' => ['web'],
 
@@ -154,6 +165,8 @@ menu:
 
 - `stylesheet` - a path (served by the package's stylesheet route) that overrides the default UI styling.
 - `menu` - a nested list of `title` / `url` / `children` items. When present, it replaces the auto-generated tree.
+- `logo` - a path or URL to a logo image shown in the sidebar header and mobile topbar. When set, it overrides the `branding.logo` config value.
+- `text` - the brand text shown when no `logo` is set. When set, it overrides the `branding.text` config value.
 
 ## Customizing the views
 

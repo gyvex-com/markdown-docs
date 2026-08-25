@@ -48,6 +48,51 @@ class DocsConfig
         return \Illuminate\Support\Arr::get(static::data(), $key, $default);
     }
 
+    public static function brandingLogo(): ?string
+    {
+        $value = static::get('logo');
+
+        if (is_string($value) && $value !== '') {
+            return $value;
+        }
+
+        $config = config('docs.branding.logo');
+
+        return is_string($config) && $config !== '' ? $config : null;
+    }
+
+    public static function brandingText(): string
+    {
+        $value = static::get('text');
+
+        if (is_string($value) && $value !== '') {
+            return $value;
+        }
+
+        $config = config('docs.branding.text');
+
+        if (is_string($config) && $config !== '') {
+            return $config;
+        }
+
+        return ucfirst(config('docs.route_prefix', 'docs'));
+    }
+
+    public static function brandingLogoUrl(): ?string
+    {
+        $logo = static::brandingLogo();
+
+        if ($logo === null) {
+            return null;
+        }
+
+        if (preg_match('#^(https?:)?//#i', $logo) || str_starts_with($logo, '/')) {
+            return $logo;
+        }
+
+        return route('markdown-docs.logo');
+    }
+
     public static function stylesheet(): ?string
     {
         $value = static::get('stylesheet');
