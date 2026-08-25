@@ -59,6 +59,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Dark Mode
+    |--------------------------------------------------------------------------
+    |
+    | When enabled, the default documentation UI is rendered in dark mode.
+    | This only affects the built-in styles; a custom stylesheet (from the
+    | `.docs.yaml` config file) always takes precedence.
+    |
+    */
+    'dark_mode' => false,
+
+    /*
+    |--------------------------------------------------------------------------
     | Cache
     |--------------------------------------------------------------------------
     |

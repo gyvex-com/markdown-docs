@@ -32,6 +32,7 @@ class DocsController
             'tree' => $nav,
             'activePath' => $activePath,
             'stylesheetUrl' => $stylesheetUrl,
+            'darkMode' => (bool) config('docs.dark_mode'),
         ]);
     }
 }
