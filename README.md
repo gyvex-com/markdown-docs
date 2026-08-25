@@ -95,6 +95,9 @@ return [
     // Optional per-docs-folder YAML config (stylesheet + menu overrides).
     'config_file' => '.docs.yaml',
 
+    // Render the built-in UI in dark mode. A custom stylesheet still wins.
+    'dark_mode' => false,
+
     // Cache rendered HTML, keyed by file path and mtime.
     'cache' => true,
 ];

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" @if ($darkMode ?? false) class="md-dark" @endif>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,6 +16,19 @@
             --md-topbar-h: 56px;
             --md-radius: 0.5rem;
         }
+        html.md-dark {
+            --md-brand: #818cf8;
+            --md-brand-soft: #1f2733;
+            --md-text: #e5e7eb;
+            --md-muted: #9aa3b2;
+            --md-border: #2a2f3a;
+            --md-bg: #0f1117;
+            --md-sidebar-bg: #14171f;
+        }
+        html.md-dark .md-content code { color: #c7d2fe; }
+        html.md-dark .md-content pre { background: #06080d; }
+        html.md-dark .md-menu-toggle,
+        html.md-dark .md-sidebar .md-close { color: var(--md-muted); }
         * { box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body {
